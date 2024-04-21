@@ -2,6 +2,7 @@ package com.example;
 
 import java.util.function.Consumer;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,21 +26,22 @@ public class ExampleModClient implements ClientModInitializer {
         t.start();
         ClientTickEvents.START_CLIENT_TICK.register(client -> {
             if (client.player != null) {
-                if (client.world != null) {
+                if (client.world != null && !client.isPaused()) {
                     String held = client.player.getHandItems().iterator().next().getItem().toString();
                     if (held != lastHeld) {
                         lastHeld = held;
                         LOGGER.info("Held item switched to: " + held);
+                        t.sendSwitchEvent(client);
                     }
-                    if (client.player.age % 20 == 0) { // Print every second (20 ticks)
-                        //t.send(client);
-                        client.player.getStatusEffects().forEach(new Consumer<StatusEffectInstance>() {
-                            @Override
-                            public void accept(StatusEffectInstance s) {
-                                LOGGER.info(s.getEffectType().getName().getString() + " " + s.getAmplifier() + " " + s.getDuration());
-                            }
-                        });
-                        LOGGER.info("" + client.player.getAttackCooldownProgress(100));
+                    if (client.player.age % 7 == 0) { // Print every second (20 ticks)
+                        t.sendPlayerData(client);
+                        // client.player.getStatusEffects().forEach(new Consumer<StatusEffectInstance>() {
+                        //     @Override
+                        //     public void accept(StatusEffectInstance s) {
+                        //         LOGGER.info(s.getEffectType().getName().getString() + " " + s.getAmplifier() + " " + s.getDuration());
+                        //     }
+                        // });
+                        // LOGGER.info("" + client.player.getAttackCooldownProgress(1));
                     }
                 }
             }

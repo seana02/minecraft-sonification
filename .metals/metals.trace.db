@@ -1,0 +1,2 @@
+2024-04-12 03:24:30.995185-04:00 database: opening /home/seanaoki/repos/minecraft-sonification/.metals/metals
+org.h2.message.DbException: Error opening database: "Sleep interrupted" [8000-224]

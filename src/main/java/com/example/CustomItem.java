@@ -9,9 +9,12 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
 public class CustomItem extends Item {
+
+    public static long startTime;
     
     public CustomItem(Settings settings) {
         super(settings);
+        startTime = System.currentTimeMillis();
     }
 
     public TypedActionResult<ItemStack> use(World world, PlayerEntity playerEntity, Hand hand) {

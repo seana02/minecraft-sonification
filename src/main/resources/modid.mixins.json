@@ -3,7 +3,7 @@
 	"package": "com.example.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"ExampleMixin"
+		"DamageTakenMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
